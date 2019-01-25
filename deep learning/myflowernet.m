@@ -40,18 +40,18 @@ confusionchart(flwrActual,flwrPreds)
 %-------------------------------------
 net = flowernet
 
-inlayer = ly(1)
-outlayer = ly(end)
+inlayer = ly(1);
+outlayer = ly(end);
 categorynames = outlayer.ClassNames
 
 sz = inlayer.InputSize
 
-imds = imageDatastore('file*.jpg')
-auds = augmentedImageDatastore([227 227], imds)
+imds = imageDatastore('file*.jpg');
+auds = augmentedImageDatastore([227 227], imds);
 
 fname = imds.Files
 
-img = readimage(auds,1)% read first image in datastore
+img = readimage(imds,1);% read first image in datastore
 
 [preds,scores] = classify(net,auds)
 
@@ -61,10 +61,8 @@ for i = 4
     thresh = median(score + std(score))
     highscores = score > 0.02
     bar(score(highscores))
-    
-    
+
     xticks(1:length(score(highscores)))
     xticklabels(categorynames(highscores))
     xtickangle(60)
-    
 end

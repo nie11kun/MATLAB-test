@@ -49,7 +49,7 @@ sz = inlayer.InputSize
 imds = imageDatastore('file*.jpg')
 auds = augmentedImageDatastore([227 227], imds)
 
-fname = auds.Files
+fname = imds.Files
 
 img = readimage(auds,1)% read first image in datastore
 
